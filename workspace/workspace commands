@@ -1,0 +1,68 @@
+# Check current workspace
+terraform workspace show
+
+# List all available workspaces
+terraform workspace list
+
+# Create new workspace for Sandbox
+terraform workspace new sand
+
+# Switch to Sandbox workspace (if already exists)
+terraform workspace select sand
+
+# Apply configuration for Sandbox
+terraform apply -var-file="sand.tfvars" --auto-approve
+
+
+# Create new workspace for QA
+terraform workspace new qa
+
+# Switch to QA workspace
+terraform workspace select qa
+
+# Apply configuration for QA
+terraform apply -var-file="qa.tfvars" --auto-approve
+
+
+# Create new workspace for Production
+terraform workspace new prod
+
+# Switch to Production workspace
+terraform workspace select prod
+
+# Apply configuration for Production
+terraform apply -var-file="prod.tfvars" --auto-approve
+========================================================================================
+Terraform Destroy Commands (Workspace-wise)
+# Check current workspace
+terraform workspace show
+
+# List all workspaces
+terraform workspace list
+
+# -----------------------
+# Destroy Sandbox
+# -----------------------
+terraform workspace select sand
+terraform destroy -var-file="sand.tfvars" --auto-approve
+
+# -----------------------
+# Destroy QA
+# -----------------------
+terraform workspace select qa
+terraform destroy -var-file="qa.tfvars" --auto-approve
+
+# -----------------------
+# Destroy Production
+# -----------------------
+terraform workspace select prod
+terraform destroy -var-file="prod.tfvars" --auto-approve
+===================================================================================
+Optional (Delete Workspace after destroy)
+# Switch to default workspace before deleting
+terraform workspace select default
+
+# Delete workspaces
+terraform workspace delete sand
+terraform workspace delete qa
+terraform workspace delete prod
